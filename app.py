@@ -7,16 +7,26 @@ num2 = st.number_input('Enter another number', format="%.2f")
 operation = st.selectbox('Operation', ('Add', 'Subtract', 'Multiply', 'Divide'))
 
 if st.button("Calculate"):
-    if operation == 'Add':
-        st.write("The sum is:", num1 + num2)
-    elif operation == 'Subtract':
-        st.write("The difference is:", num1 - num2)
-    elif operation == 'Multiply':
-        st.write("The product is:", num1 * num2)
-    elif operation == 'Divide':
-        if num2 == 0:
-            st.error("Division by zero is not allowed!")
-        else:
-            st.write("The division result is:", num1 / num2)
+    try:
+        if operation == 'Add':
+            result = num1 + num2
+            st.write("The sum is:", result)
+        elif operation == 'Subtract':
+            result = num1 - num2
+            st.write("The difference is:", result)
+        elif operation == 'Multiply':
+            result = num1 * num2
+            st.write("The product is:", result)
+        elif operation == 'Divide':
+            if num2 == 0:
+                raise ZeroDivisionError("Cannot divide by zero!")
+            result = num1 / num2
+            st.write("The division result is:", result)
+    except ZeroDivisionError as e:
+        st.error(f"Error: {e}")  
+    except Exception as e:
+        st.error(f"Something went wrong! {e}") 
+
+
 if st.button("Continue"):
     st.experimental_rerun()
