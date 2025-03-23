@@ -29,4 +29,4 @@ if st.button("Calculate"):
 
 
 if st.button("Continue"):
-    st.experimental_rerun()
+    st.rerun()
